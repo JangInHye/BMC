@@ -13,5 +13,7 @@ UCLASS()
 class BMCGAME_API ABMCGameGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	ABMCGameGameModeBase();
 };
