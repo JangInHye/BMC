@@ -17,9 +17,13 @@ class BMCGAME_API ADeliveryGameState : public AGameStateBase
 private:
 	FTimerHandle MyTimerHandle;
 
+	void BeginPlay() override;
+
 	void ShowRemainTime(float remainTime);
 	void CheckRemainTime();
 	
+	const float timeLimit = 5.f;
+	float myTime;
 public:
 	ADeliveryGameState();
 };
