@@ -16,4 +16,17 @@ class BMCGAME_API ADeliveryGameMode : public AGameModeBase
 
 public:
 	ADeliveryGameMode();
+
+	virtual void PostLogin(APlayerController* NewPlayer) override;
+
+private:
+	FTimerHandle MyTimerHandle;
+
+	void StartPlay() override;
+
+	void ShowRemainTime(float remainTime);
+	void CheckRemainTime();
+
+	const float timeLimit = 10.f;
+	float myTime;
 };
