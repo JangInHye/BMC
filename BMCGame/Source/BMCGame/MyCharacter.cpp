@@ -80,11 +80,11 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 void AMyCharacter::UpDown(float NewAxisValue)
 {
 	DirectionToMove.X = NewAxisValue;
-	UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
+	//UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
 }
 
 void AMyCharacter::LeftRight(float NewAxisValue)
 {
 	DirectionToMove.Y = NewAxisValue;
-	UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
+	//UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
 }

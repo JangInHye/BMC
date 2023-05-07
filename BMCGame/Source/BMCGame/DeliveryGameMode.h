@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TableInstanceSubsystem.h"
 #include "GameFramework/GameModeBase.h"
 #include "DeliveryGameMode.generated.h"
 
@@ -21,6 +22,7 @@ public:
 
 private:
 	FTimerHandle MyTimerHandle;
+	UTableInstanceSubsystem* TableSubSystem;
 
 	void StartPlay() override;
 
