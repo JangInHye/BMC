@@ -3,8 +3,12 @@
 
 #include "OfficeGameMode.h"
 #include "OfficeGameState.h"
+#include "ABPlayerController.h"
+#include "MyCharacter.h"
 
 AOfficeGameMode::AOfficeGameMode()
 {
 	GameStateClass = AOfficeGameState::StaticClass();
+	DefaultPawnClass = AMyCharacter::StaticClass();
+	PlayerControllerClass = AABPlayerController::StaticClass();
 }
