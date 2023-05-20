@@ -47,6 +47,8 @@ AMyCharacter::AMyCharacter()
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 720.0f, 0.0f);
+
+	GetCapsuleComponent()->SetCollisionProfileName(TEXT("ABPlayer"));
 }
 
 // Called when the game starts or when spawned
