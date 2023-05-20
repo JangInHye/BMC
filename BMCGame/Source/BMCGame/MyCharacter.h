@@ -31,11 +31,13 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		USpringArmComponent* SpringArm;
-
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		UCameraComponent* Camera;
 
 private:
+	FRotator CameraRotator = FRotator(-45.0f, 0.0f, 0.0f);
+	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
+
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);
 };
