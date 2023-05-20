@@ -17,5 +17,8 @@ void UTableInstanceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 
 void UTableInstanceSubsystem::Deinitialize()
 {
-	DeliveryQuestTable->EmptyTable();
+	if (DeliveryQuestTable != nullptr)
+	{
+		DeliveryQuestTable->EmptyTable();
+	}
 }
