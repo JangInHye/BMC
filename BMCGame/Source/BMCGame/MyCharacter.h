@@ -35,11 +35,11 @@ public:
 		UCameraComponent* Camera;
 
 	UPROPERTY(EditAnywhere, Category = Camera)
-		FRotator CameraRotator = FRotator(-45.0f, 0.0f, 0.0f);
+		FRotator CameraRotator = FRotator(-55.0f, 0.0f, 0.0f);
 	UPROPERTY(EditAnywhere, Category = Camera)
 		float CameraDistance = 800.0f;
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
-		float MoveSpeed = 1.0f;
+		float MoveSpeed = 0.5f;
 
 private:
 	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
