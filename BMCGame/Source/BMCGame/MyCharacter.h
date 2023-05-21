@@ -36,12 +36,12 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Camera)
 		FRotator CameraRotator = FRotator(-45.0f, 0.0f, 0.0f);
-	UPROPERTY(EditAnywhere, Category = Camera)
-		FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
 		float MoveSpeed = 1.0f;
 
 private:
+	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
+
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);
 };

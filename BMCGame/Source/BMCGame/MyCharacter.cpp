@@ -46,7 +46,7 @@ AMyCharacter::AMyCharacter()
 
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
-	GetCharacterMovement()->RotationRate = CameraRotator;
+	GetCharacterMovement()->RotationRate = CameraRotationRate;
 
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("ABPlayer"));
 }
@@ -63,10 +63,13 @@ void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// test
+	SpringArm->SetRelativeRotation(CameraRotator);
+
 	if (DirectionToMove.SizeSquared() > 0.0f)
 	{
 		GetController()->SetControlRotation(FRotationMatrix::MakeFromX(DirectionToMove).Rotator());
-		AddMovementInput(DirectionToMove * MoveSpeed);
+		AddMovementInput(DirectionToMove, MoveSpeed);
 	}
 }
 
