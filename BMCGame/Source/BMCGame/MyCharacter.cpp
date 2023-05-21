@@ -35,7 +35,7 @@ AMyCharacter::AMyCharacter()
 		GetMesh()->SetAnimInstanceClass(WARRIOR_ANIM.Class);
 	}
 
-	SpringArm->TargetArmLength = 800.0f;
+	SpringArm->TargetArmLength = CameraDistance;
 	SpringArm->SetRelativeRotation(CameraRotator);
 	SpringArm->bUsePawnControlRotation = false;
 	SpringArm->bInheritPitch = false;
@@ -65,6 +65,7 @@ void AMyCharacter::Tick(float DeltaTime)
 
 	// test
 	SpringArm->SetRelativeRotation(CameraRotator);
+	SpringArm->TargetArmLength = CameraDistance;
 
 	if (DirectionToMove.SizeSquared() > 0.0f)
 	{
