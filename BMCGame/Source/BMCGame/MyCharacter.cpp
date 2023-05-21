@@ -66,7 +66,7 @@ void AMyCharacter::Tick(float DeltaTime)
 	if (DirectionToMove.SizeSquared() > 0.0f)
 	{
 		GetController()->SetControlRotation(FRotationMatrix::MakeFromX(DirectionToMove).Rotator());
-		AddMovementInput(DirectionToMove);
+		AddMovementInput(DirectionToMove * MoveSpeed);
 	}
 }
 

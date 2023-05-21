@@ -34,10 +34,14 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		UCameraComponent* Camera;
 
-private:
-	FRotator CameraRotator = FRotator(-45.0f, 0.0f, 0.0f);
-	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
+	UPROPERTY(EditAnywhere, Category = Camera)
+		FRotator CameraRotator = FRotator(-45.0f, 0.0f, 0.0f);
+	UPROPERTY(EditAnywhere, Category = Camera)
+		FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
+	UPROPERTY(EditAnywhere, Category = MyCharacter)
+		float MoveSpeed = 1.0f;
 
+private:
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);
 };
