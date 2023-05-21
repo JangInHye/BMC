@@ -39,7 +39,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = Camera)
 		float CameraDistance = 800.0f;
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
-		float MoveSpeed = 0.5f;
+		float MoveSpeed = 0.5f;			// -1~1 사이의 값이어야 함
+	UPROPERTY(EditAnywhere, Category = MyCharacter)
+		float WalkMaxSpeed = 600.0f;
 
 private:
 	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);

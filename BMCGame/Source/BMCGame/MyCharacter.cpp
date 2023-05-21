@@ -47,6 +47,7 @@ AMyCharacter::AMyCharacter()
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->RotationRate = CameraRotationRate;
+	GetCharacterMovement()->MaxWalkSpeed = WalkMaxSpeed;
 
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("ABPlayer"));
 }
@@ -66,6 +67,7 @@ void AMyCharacter::Tick(float DeltaTime)
 	// test
 	SpringArm->SetRelativeRotation(CameraRotator);
 	SpringArm->TargetArmLength = CameraDistance;
+	GetCharacterMovement()->MaxWalkSpeed = WalkMaxSpeed;
 
 	if (DirectionToMove.SizeSquared() > 0.0f)
 	{
