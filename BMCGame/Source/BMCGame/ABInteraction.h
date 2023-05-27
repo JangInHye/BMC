@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ShapeComponent.h"
 #include "GameFramework/Pawn.h"
+#include "Components/WidgetComponent.h"
 #include "ABInteraction.generated.h"
 
 UCLASS()
@@ -28,6 +29,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = Interaction)
 		bool IsOverlap = false;
+
+	UPROPERTY(VisibleAnywhere, Category = UI)
+		class UWidgetComponent* InteractionWidget;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
