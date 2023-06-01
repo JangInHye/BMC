@@ -27,21 +27,15 @@ public:
 	UPROPERTY(EditAnywhere, Category = Interaction)
 		UStaticMeshComponent* Mesh;
 
-	UPROPERTY(VisibleAnywhere, Category = Interaction)
-		bool IsOverlap = false;
-
 	UPROPERTY(VisibleAnywhere, Category = UI)
 		class UWidgetComponent* InteractionWidget;
 
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	UFUNCTION()
+		virtual void OnInteraction();
 private:
 	UFUNCTION()
 		virtual void OnBeginCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
 		virtual void OnEndCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-	UFUNCTION()
-		virtual void OnInteraction();
 };

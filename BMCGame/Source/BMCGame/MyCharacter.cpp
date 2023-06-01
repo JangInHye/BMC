@@ -81,8 +81,23 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	// wasd 이동
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::UpDown);
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::LeftRight);
+
+	// interaction E키
+	PlayerInputComponent->BindAction(TEXT("Interaction"), EInputEvent::IE_Pressed, this, &AMyCharacter::OnInteraction);
+}
+
+void AMyCharacter::OnInteractionStart(AABInteraction* interaction)
+{
+	interactionObj = interaction;
+	UE_LOG(LogTemp, Warning, TEXT("OnInteractionStart : %s"), *interactionObj->GetName());
+}
+
+void AMyCharacter::OnInteractionEnd()
+{
+	interactionObj = NULL;
 }
 
 void AMyCharacter::UpDown(float NewAxisValue)
@@ -95,4 +110,13 @@ void AMyCharacter::LeftRight(float NewAxisValue)
 {
 	DirectionToMove.Y = NewAxisValue;
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
+}
+
+void AMyCharacter::OnInteraction()
+{
+	// 현재 충돌중인 상호작용 오브젝트에 신호
+	if (interactionObj != NULL)
+	{
+		interactionObj->OnInteraction();
+	}
 }

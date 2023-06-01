@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "ABInteraction.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
@@ -29,6 +30,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// 현재 충돌 중인 상호작용 오브젝트에서 호출함
+	// 충돌 시작
+	void OnInteractionStart(AABInteraction* interaction);
+	// 충돌 끝
+	void OnInteractionEnd();
+
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere, Category = Camera)
@@ -45,7 +52,9 @@ public:
 
 private:
 	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
+	AABInteraction* interactionObj;		// 상호작용 오브젝트가 1개라는 전제
 
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);
+	void OnInteraction();
 };
