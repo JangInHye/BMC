@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TableInstanceSubsystem.h"
+#include "QuestInstanceSubsystem.h"
 #include "GameFramework/GameModeBase.h"
 #include "DeliveryGameMode.generated.h"
 
@@ -22,13 +22,13 @@ public:
 
 private:
 	FTimerHandle MyTimerHandle;
-	UTableInstanceSubsystem* TableSubSystem;
+	UQuestInstanceSubsystem* _questInstance;
 
 	void StartPlay() override;
 
 	void ShowRemainTime(float remainTime);
 	void CheckRemainTime();
 
-	const float timeLimit = 10.f;
+	const float timeLimit = 1000.f;
 	float myTime;
 };

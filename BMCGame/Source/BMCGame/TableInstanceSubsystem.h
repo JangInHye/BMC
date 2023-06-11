@@ -19,7 +19,10 @@ public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Deinitialize() override;
 
-	class UDataTable* DeliveryQuestTable;			// 운송퀘스트 테이블
+	class UDataTable* DeliveryQuestTable;					// 운송퀘스트 테이블
+	class UDataTable* DeliveryQuestConditionTable;		// 운송퀘스트 조건 테이블
+	class UDataTable* DeliveryQuestCompleteTable;		// 운송퀘스트 완료 테이블
+	class UDataTable* DeliveryItemTable;						// 택배 아이템 테이블
 
 private:
 	FORCEINLINE UDataTable* LoadObjFromPath(const FName& Path)

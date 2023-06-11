@@ -5,8 +5,6 @@
 #include "DeliveryGameState.h"
 #include "ABPlayerController.h"
 #include "MyCharacter.h"
-#include "FDeliveryQuestTable.h"
-
 #include "Kismet/GameplayStatics.h"
 
 ADeliveryGameMode::ADeliveryGameMode()
@@ -35,23 +33,11 @@ void ADeliveryGameMode::StartPlay()
 		GetWorldTimerManager().SetTimer(MyTimerHandle, this, &ADeliveryGameMode::CheckRemainTime, 1.0f, true, 0.0f);
 	}
 
-	if (TableSubSystem == nullptr)
-	{
-		UGameInstance* GameInstance = GetGameInstance();
-		TableSubSystem = GameInstance->GetSubsystem<UTableInstanceSubsystem>();
-	}
-
-	// 읽어온 시트 체크
-	/*
-	if (TableSubSystem != nullptr && TableSubSystem->DeliveryQuestTable != nullptr)
-	{
-		for (int32 i = 1; i <= 7; i++)
-		{
-			FDeliveryQuestTable* DeliveryQuestTableRow = TableSubSystem->DeliveryQuestTable->FindRow<FDeliveryQuestTable>(FName(*(FString::FormatAsNumber(i))), FString(""));
-			UE_LOG(LogTemp, Log, TEXT("Index.%d :: QuestType(%d) Start(%d) BlockID(%d) MinDayCount(%d) MaxDayCount(%d) BagGrade(%d) QuestClear(%d) QuestClearCount(%d) CompleteType(%d) CompleteTypeValue(%d) Rate(%d) Reward(%d)"), i,
-				(*DeliveryQuestTableRow).QuestType, (*DeliveryQuestTableRow).Start, (*DeliveryQuestTableRow).BlockID, (*DeliveryQuestTableRow).MinDayCount, (*DeliveryQuestTableRow).MaxDayCount, (*DeliveryQuestTableRow).BagGrade, (*DeliveryQuestTableRow).QuestClear, (*DeliveryQuestTableRow).QuestClearCount, (*DeliveryQuestTableRow).CompleteType, (*DeliveryQuestTableRow).CompleteTypeValue, (*DeliveryQuestTableRow).Rate, (*DeliveryQuestTableRow).Reward);
-		}
-	}*/
+	// 퀘스트 세팅
+	// TODO 나중에 준비 레벨 시작할 때로 위치 옮겨야함
+	UGameInstance* GameInstance = GetGameInstance();
+	_questInstance = GameInstance->GetSubsystem<UQuestInstanceSubsystem>();
+	_questInstance->SetQuestList();
 }
 
 /// <summary>
