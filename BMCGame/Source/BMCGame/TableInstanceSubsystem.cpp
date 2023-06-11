@@ -6,7 +6,7 @@
 
 void UTableInstanceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
-	Super::Initialize(Collection);
+	Collection.InitializeDependency(UTableInstanceSubsystem::StaticClass());
 
 	// 운송퀘스트 테이블 불러오기
 	DeliveryQuestTable = LoadObjFromPath(TEXT("/Game/Sheets/DeliveryQuestTable"));

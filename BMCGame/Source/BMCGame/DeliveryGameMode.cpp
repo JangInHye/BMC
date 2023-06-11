@@ -34,10 +34,8 @@ void ADeliveryGameMode::StartPlay()
 	}
 
 	// 퀘스트 세팅
-	// TODO 나중에 준비 레벨 시작할 때로 위치 옮겨야함
 	UGameInstance* GameInstance = GetGameInstance();
 	_questInstance = GameInstance->GetSubsystem<UQuestInstanceSubsystem>();
-	_questInstance->SetQuestList();
 }
 
 /// <summary>

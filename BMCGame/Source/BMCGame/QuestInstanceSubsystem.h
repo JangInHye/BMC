@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "FDeliveryQuestTable.h"
 #include <vector>
-#include "PlayerDataInstanceSubsystem.h"
 #include "TableInstanceSubsystem.h"
+#include "PlayerDataInstanceSubsystem.h"
+#include "FDeliveryQuestTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "QuestInstanceSubsystem.generated.h"
 //
@@ -33,8 +33,6 @@ public:
 	void SetQuestList();
 
 private:
-	const int MAX_QUEST_COUNT = 3;		// TODO 추후 테이블에 있는 데이터를 가져와 사용할 것
-
 	UTableInstanceSubsystem* _tableSubSystem;
 	UPlayerDataInstanceSubsystem* _playerData;
 	std::vector<FDeliveryQuestTable> _questVector;

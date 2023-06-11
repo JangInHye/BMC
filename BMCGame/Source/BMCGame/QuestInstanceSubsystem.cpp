@@ -2,23 +2,20 @@
 
 
 #include "QuestInstanceSubsystem.h"
-#include "FDeliveryQuestTable.h"
 #include "FDeliveryQuestConditionTable.h"
 using namespace std;
 
 void UQuestInstanceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
-	Super::Initialize(Collection);
+	Collection.InitializeDependency(UTableInstanceSubsystem::StaticClass());
 
 	if (_tableSubSystem == nullptr)
 	{
-		UGameInstance* GameInstance = GetGameInstance();
-		_tableSubSystem = GameInstance->GetSubsystem<UTableInstanceSubsystem>();
+		_tableSubSystem = GetGameInstance()->GetSubsystem<UTableInstanceSubsystem>();
 	}
 	if (_playerData == nullptr)
 	{
-		UGameInstance* GameInstance = GetGameInstance();
-		_playerData = GameInstance->GetSubsystem<UPlayerDataInstanceSubsystem>();
+		_playerData = GetGameInstance()->GetSubsystem<UPlayerDataInstanceSubsystem>();
 	}
 }
 
@@ -46,24 +43,33 @@ void UQuestInstanceSubsystem::SetQuestList()
 	_questVector.clear();
 
 	int curDay = _playerData->GetCurDay();
-	int curInventoryGrade = _playerData->GetCurInvenGrade();
+	int curInvenGrade = _playerData->GetCurInvenGrade();
 
 	list< FDeliveryQuestTable> normalDeliveryList;
 	list< FDeliveryQuestTable> specialDeliveryList;
 
 	// QuestType 1 일반택배는 3~4개 ?
 	// QuestType 2 특급택배는 조건 충족하면 바로 지급
-	for (int i = 0; i < _tableSubSystem->DeliveryQuestTable->GetRowMap().Num(); i++)
+	if (_tableSubSystem == nullptr || _tableSubSystem->DeliveryQuestTable == nullptr) return;
+	TArray<FName> RowNames = _tableSubSystem->DeliveryQuestTable->GetRowNames();
+	for (int i = 0; i < RowNames.Num(); i++)
 	{
 		// 퀘스트 확인
-		FDeliveryQuestTable* questTableRow = _tableSubSystem->DeliveryQuestTable->FindRow<FDeliveryQuestTable>(FName(*(FString::FormatAsNumber(i))), FString(""));
+		FDeliveryQuestTable* questTableRow = _tableSubSystem->DeliveryQuestTable->FindRow<FDeliveryQuestTable>(RowNames[i], RowNames[i].ToString());
+		if (questTableRow == nullptr) continue;
 
 		// 조건 테이블 가져오기
+		// TODO 테이블을 ID로 가져오는 방법 생각해보기
 		FDeliveryQuestConditionTable* questConditionTableRow = _tableSubSystem->DeliveryQuestConditionTable->FindRow<FDeliveryQuestConditionTable>(FName(*(FString::FormatAsNumber(questTableRow->Condition))), FString(""));
+		if (questConditionTableRow == nullptr) continue;
 
 		// 등장 가능한 날짜인지 체크
+		if (curDay < questConditionTableRow->MinDayCount
+			|| questConditionTableRow->MaxDayCount <= curDay) continue;
 
 		// 운송가방 등급 체크
+		if (curInvenGrade < questConditionTableRow->MinInventoryGrade
+			|| questConditionTableRow->MaxDayCount <= curInvenGrade) continue;
 
 		// 선행퀘스트 클리어 여부
 

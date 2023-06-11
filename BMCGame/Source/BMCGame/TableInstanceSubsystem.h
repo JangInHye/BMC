@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "Engine/DataTable.h"
 #include "CoreMinimal.h"
+#include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "TableInstanceSubsystem.generated.h"
 
