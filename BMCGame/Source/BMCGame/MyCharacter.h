@@ -7,6 +7,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "ABInteraction.h"
+#include "Components/WidgetComponent.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
@@ -49,6 +50,11 @@ public:
 		float MoveSpeed = 0.5f;			// -1~1 사이의 값이어야 함
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
 		float WalkMaxSpeed = 600.0f;
+
+	//인터렉션 UI 추가
+	UPROPERTY(VisibleAnywhere, Category = UI)
+		class UWidgetComponent* InteractionWidget;
+
 
 private:
 	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);

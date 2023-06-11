@@ -51,8 +51,7 @@ void AABInteraction::OnBeginCharacterOverlap(UPrimitiveComponent* OverlappedComp
 	AMyCharacter* myChar = (AMyCharacter*)OtherActor;
 	myChar->OnInteractionStart(this);
 
-	// 상호작용 UI
-	InteractionWidget->SetVisibility(true);
+
 }
 
 // 트리거 충돌 종료 시 처리
@@ -63,10 +62,9 @@ void AABInteraction::OnEndCharacterOverlap(UPrimitiveComponent* OverlappedComp, 
 
 	// 플레이어에 충돌 끝났다고 알려주기
 	AMyCharacter* myChar = (AMyCharacter*)OtherActor;
-	myChar->OnInteractionStart(this);
+	myChar->OnInteractionEnd();
 
-	// 상호작용 UI
-	InteractionWidget->SetVisibility(false);
+
 }
 
 // E 키를 눌렀을 때 처리

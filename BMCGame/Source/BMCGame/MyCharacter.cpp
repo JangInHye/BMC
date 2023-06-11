@@ -2,6 +2,7 @@
 
 
 #include "MyCharacter.h"
+#include <Blueprint/UserWidget.h>
 #include "Components/SceneComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -13,13 +14,17 @@ AMyCharacter::AMyCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SPRIGNARM"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
+	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("UI_INTERACTION"));
 
 	SpringArm->SetupAttachment(GetCapsuleComponent());
 	Camera->SetupAttachment(SpringArm);
+	InteractionWidget->SetupAttachment(RootComponent);
 
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -88.0f), FRotator(0.0f, -90.0f, 0.0f));
 	SpringArm->TargetArmLength = 400.0f;
 	SpringArm->SetRelativeRotation(FRotator(-15.0f, 0.0f, 0.0f));
+	InteractionWidget->SetRelativeLocation(FVector(0.0f,0.0f,130.0f));
+	InteractionWidget->SetWidgetSpace(EWidgetSpace::Screen);
 
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_CARDBOARD(TEXT("/Game/Dummy/Characters/Mannequins/Meshes/SKM_Manny"));
 	if (SK_CARDBOARD.Succeeded())
@@ -33,6 +38,14 @@ AMyCharacter::AMyCharacter()
 	if (WARRIOR_ANIM.Succeeded())
 	{
 		GetMesh()->SetAnimInstanceClass(WARRIOR_ANIM.Class);
+	}
+
+	static  ConstructorHelpers::FClassFinder<UUserWidget> UI_HUD(TEXT("/Game/Dummy/UMG/UMG_Interaction"));
+	if (UI_HUD.Succeeded())
+	{
+		InteractionWidget->SetWidgetClass(UI_HUD.Class);
+		InteractionWidget->SetDrawSize(FVector2D(140.0f, 20.0f));
+		InteractionWidget->SetVisibility(false);
 	}
 
 	SpringArm->TargetArmLength = CameraDistance;
@@ -50,6 +63,8 @@ AMyCharacter::AMyCharacter()
 	GetCharacterMovement()->MaxWalkSpeed = WalkMaxSpeed;
 
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("ABPlayer"));
+
+	//
 }
 
 // Called when the game starts or when spawned
@@ -84,20 +99,23 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	// wasd ÀÌµ¿
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::UpDown);
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::LeftRight);
-
+	
 	// interaction EÅ°
 	PlayerInputComponent->BindAction(TEXT("Interaction"), EInputEvent::IE_Pressed, this, &AMyCharacter::OnInteraction);
+	
 }
 
 void AMyCharacter::OnInteractionStart(AABInteraction* interaction)
 {
 	interactionObj = interaction;
 	UE_LOG(LogTemp, Warning, TEXT("OnInteractionStart : %s"), *interactionObj->GetName());
+	InteractionWidget->SetVisibility(true);
 }
 
 void AMyCharacter::OnInteractionEnd()
 {
 	interactionObj = NULL;
+	InteractionWidget->SetVisibility(false);
 }
 
 void AMyCharacter::UpDown(float NewAxisValue)
