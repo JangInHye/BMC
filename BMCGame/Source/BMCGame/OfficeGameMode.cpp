@@ -6,17 +6,19 @@
 #include "ABPlayerController.h"
 #include "MyCharacter.h"
 
-void AOfficeGameMode::StartPlay()
-{
-	// Äù½ºÆ® ¼¼ÆÃ
-	UGameInstance* GameInstance = GetGameInstance();
-	_questInstance = GameInstance->GetSubsystem<UQuestInstanceSubsystem>();
-	_questInstance->SetQuestList();
-}
-
 AOfficeGameMode::AOfficeGameMode()
 {
 	GameStateClass = AOfficeGameState::StaticClass();
 	DefaultPawnClass = AMyCharacter::StaticClass();
 	PlayerControllerClass = AABPlayerController::StaticClass();
+}
+
+void AOfficeGameMode::StartPlay()
+{
+	Super::StartPlay();
+
+	// Äù½ºÆ® ¼¼ÆÃ
+	UGameInstance* GameInstance = GetGameInstance();
+	_questInstance = GameInstance->GetSubsystem<UQuestInstanceSubsystem>();
+	_questInstance->SetQuestList();
 }
