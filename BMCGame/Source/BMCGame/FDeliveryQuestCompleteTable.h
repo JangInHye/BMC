@@ -1,29 +1,30 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Engine/DataTable.h"
+#include "FQuestTableBase.h"
 #include "FDeliveryQuestCompleteTable.generated.h"
 
 USTRUCT(BlueprintType)
-struct FDeliveryQuestCompleteTable : public FTableRowBase
+struct FDeliveryQuestCompleteTable : public FQuestTableBase
 {
 	GENERATED_BODY()
 
 public:
 
-	// Äù½ºÆ® ¾ÆÀÌµğ
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Complete")
-		int32 ID;
+	// í€˜ìŠ¤íŠ¸ ì•„ì´ë””
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Complete")
+	//	int32 ID;
 
-	// ¿Ï·á Á¶°Ç
-	// 1 : Æ¯Á¤ »óÈ£ÀÛ¿ë, NPC¿Í ´ëÈ­
+	// ì™„ë£Œ ì¡°ê±´
+	// 1 : íŠ¹ì • ìƒí˜¸ì‘ìš©, NPCì™€ ëŒ€í™”
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Complete")
 		int32 CompleteType;
 
-	// À§ °ª¿¡ µû¸¥ ID°ª (¿ì¼± NPC¿Í ¿ÀºêÁ§Æ® ÅëÀÏÇØ¼­ »ç¿ë)
+	// ìœ„ ê°’ì— ë”°ë¥¸ IDê°’ (ìš°ì„  NPCì™€ ì˜¤ë¸Œì íŠ¸ í†µì¼í•´ì„œ ì‚¬ìš©)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Complete")
 		int32 CompleteTypeValue;
 };

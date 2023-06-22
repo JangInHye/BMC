@@ -7,6 +7,14 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "TableInstanceSubsystem.generated.h"
 
+UENUM(BlueprintType)
+enum class ETableType : uint8
+{
+	E_Default UMETA(DisplayName = "Quest Default"),
+	E_Condition UMETA(DisplayName = "Quest Condition"),
+	E_Complete UMETA(DisplayName = "Quest Complete"),
+};
+
 /**
  * 
  */
@@ -16,6 +24,7 @@ class BMCGAME_API UTableInstanceSubsystem : public UGameInstanceSubsystem
 	GENERATED_BODY()
 
 public:
+	
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Deinitialize() override;
 
@@ -24,6 +33,11 @@ public:
 	class UDataTable* DeliveryQuestCompleteTable;		// 운송퀘스트 완료 테이블
 	class UDataTable* DeliveryItemTable;						// 택배 아이템 테이블
 
+	// 행 이름 기준
+	UDataTable* GetRowByName(ETableType type, FName name);
+	// ID 기준
+	UDataTable* GetRowByID(ETableType type, int32 id);
+
 private:
 	FORCEINLINE UDataTable* LoadObjFromPath(const FName& Path)
 	{
@@ -31,4 +45,6 @@ private:
 
 		return Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), NULL, *Path.ToString()));
 	}
+
+	UDataTable* GetTableByEnum(ETableType type);
 };

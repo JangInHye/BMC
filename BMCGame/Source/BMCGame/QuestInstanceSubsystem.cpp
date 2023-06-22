@@ -55,13 +55,14 @@ void UQuestInstanceSubsystem::SetQuestList()
 	for (int i = 0; i < RowNames.Num(); i++)
 	{
 		// 퀘스트 확인
-		FDeliveryQuestTable* questTableRow = _tableSubSystem->DeliveryQuestTable->FindRow<FDeliveryQuestTable>(RowNames[i], RowNames[i].ToString());
+		FDeliveryQuestTable* questTableRow = (FDeliveryQuestTable*)_tableSubSystem->GetRowByName(ETableType::E_Default, RowNames[i]);
 		if (questTableRow == nullptr) continue;
 
 		// 조건 테이블 가져오기
-		// TODO 테이블을 ID로 가져오는 방법 생각해보기
-		FDeliveryQuestConditionTable* questConditionTableRow = _tableSubSystem->DeliveryQuestConditionTable->FindRow<FDeliveryQuestConditionTable>(FName(*(FString::FormatAsNumber(questTableRow->Condition))), FString(""));
+		FDeliveryQuestConditionTable* questConditionTableRow = (FDeliveryQuestConditionTable*)_tableSubSystem->GetRowByID(ETableType::E_Condition, questTableRow->Condition);
 		if (questConditionTableRow == nullptr) continue;
+
+		UE_LOG(LogTemp, Warning, TEXT("SetQuestList MinDay :: %d"), questConditionTableRow->MinDayCount);
 
 		// 등장 가능한 날짜인지 체크
 		if (curDay < questConditionTableRow->MinDayCount

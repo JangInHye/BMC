@@ -1,67 +1,68 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Engine/DataTable.h"
+#include "FQuestTableBase.h"
 #include "FDeliveryQuestTable.generated.h"
 
 USTRUCT(BlueprintType)
-struct FDeliveryQuestTable : public FTableRowBase
+struct FDeliveryQuestTable : public FQuestTableBase
 {
 	GENERATED_BODY()
 
 public:
 
-	// Äù½ºÆ® ¾ÆÀÌµğ
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
-		int32 ID;
+	// í€˜ìŠ¤íŠ¸ ì•„ì´ë””
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
+	//	int32 ID;
 
-	// Äù½ºÆ® Å¸ÀÔ
-	// 1 : ÀÏ¹İ ÅÃ¹è
-	// 2 : Æ¯±Ş ÅÃ¹è (1È¸¼º Áö±Ş)
+	// í€˜ìŠ¤íŠ¸ íƒ€ì…
+	// 1 : ì¼ë°˜ íƒë°°
+	// 2 : íŠ¹ê¸‰ íƒë°° (1íšŒì„± ì§€ê¸‰)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		int32 QuestType;
 
-	// ÇØ´ç Äù½ºÆ®¿¡ Áö±ŞÇÒ ÅÃ¹è ID
+	// í•´ë‹¹ í€˜ìŠ¤íŠ¸ì— ì§€ê¸‰í•  íƒë°° ID
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		int32 BlockID;
 
-	// Äù½ºÆ® Áö±Ş Á¶°Ç
-	// QuestConditionTable ID°ª ÂüÁ¶
+	// í€˜ìŠ¤íŠ¸ ì§€ê¸‰ ì¡°ê±´
+	// QuestConditionTable IDê°’ ì°¸ì¡°
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		int32 Condition;
 
-	// Äù½ºÆ® ¿Ï·á Á¶°Ç
-	// QuestCompleteTable ID°ª ÂüÁ¶
+	// í€˜ìŠ¤íŠ¸ ì™„ë£Œ ì¡°ê±´
+	// QuestCompleteTable IDê°’ ì°¸ì¡°
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		int32 Complete;
 
-	// º¸°ü °¡´É ³¯Â¥
-	// ÃÖÃÊ º¸°üÀÏºÎÅÍ ÇØ´ç ³¯Â¥°¡ Áö³ª¸é »èÁ¦
-	// -1ÀÏ °æ¿ì º¸°ü±âÇÑ ¹«Á¦ÇÑ
+	// ë³´ê´€ ê°€ëŠ¥ ë‚ ì§œ
+	// ìµœì´ˆ ë³´ê´€ì¼ë¶€í„° í•´ë‹¹ ë‚ ì§œê°€ ì§€ë‚˜ë©´ ì‚­ì œ
+	// -1ì¼ ê²½ìš° ë³´ê´€ê¸°í•œ ë¬´ì œí•œ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		int32 Expirydate;
 
-	// Äù½ºÆ® ¸í (String Table »ç¿ë)
+	// í€˜ìŠ¤íŠ¸ ëª… (String Table ì‚¬ìš©)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		FText QuestName;
 
-	// Äù½ºÆ® ÁÖ¼Ò (String Table »ç¿ë)
+	// í€˜ìŠ¤íŠ¸ ì£¼ì†Œ (String Table ì‚¬ìš©)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		FText QuestAddress;
 
-	// Äù½ºÆ® ¼º°ø ½Ã Ãâ·Â ´ÙÀÌ¾ó·Î±× (Dialogue_Table ID ÂüÁ¶)
+	// í€˜ìŠ¤íŠ¸ ì„±ê³µ ì‹œ ì¶œë ¥ ë‹¤ì´ì–¼ë¡œê·¸ (Dialogue_Table ID ì°¸ì¡°)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		int32 CompleteDialogue;
 
-	// Äù½ºÆ® ½ÇÆĞ ½Ã Ãâ·Â ´ÙÀÌ¾ó·Î±× (Dialogue_Table ID ÂüÁ¶)
-	// ¿ÀºêÁ§Æ® ¹× NPC¿Í »óÈ£ÀÛ¿ë ½Ã ³ª¿À´Â ÅØ½ºÆ®
+	// í€˜ìŠ¤íŠ¸ ì‹¤íŒ¨ ì‹œ ì¶œë ¥ ë‹¤ì´ì–¼ë¡œê·¸ (Dialogue_Table ID ì°¸ì¡°)
+	// ì˜¤ë¸Œì íŠ¸ ë° NPCì™€ ìƒí˜¸ì‘ìš© ì‹œ ë‚˜ì˜¤ëŠ” í…ìŠ¤íŠ¸
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		int32 FailDialogue;
 
-	// Reward ID °ª
+	// Reward ID ê°’
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest")
 		int32 Reward;
 };

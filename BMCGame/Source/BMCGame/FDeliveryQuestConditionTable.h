@@ -1,50 +1,52 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Engine/DataTable.h"
+#include "FQuestTableBase.h"
+#include "FQuestTableBase.h"
 #include "FDeliveryQuestConditionTable.generated.h"
 
 USTRUCT(BlueprintType)
-struct FDeliveryQuestConditionTable : public FTableRowBase
+struct FDeliveryQuestConditionTable : public FQuestTableBase
 {
 	GENERATED_BODY()
 
 public:
 
-	// Äù½ºÆ® ¾ÆÀÌµğ
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Condition")
-		int32 ID;
+	// í€˜ìŠ¤íŠ¸ ì•„ì´ë””
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Condition")
+	//	int32 ID;
 
-	// µîÀå °¡´É ÃÖ¼Ò ³¯Â¥
+	// ë“±ì¥ ê°€ëŠ¥ ìµœì†Œ ë‚ ì§œ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Condition")
 		int32 MinDayCount;
 
-	// µîÀå °¡´É ÃÖ´ë ³¯Â¥
+	// ë“±ì¥ ê°€ëŠ¥ ìµœëŒ€ ë‚ ì§œ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Condition")
 		int32 MaxDayCount;
 
-	// ÇöÀç À¯ÀúÀÇ °¡¹æ µî±Ş Ã¼Å©
-	// µî±ŞÀÇ ¼ıÀÚ°¡ ÇØ´ç ÄÃ·³ °ª°ú °°°Å³ª ³ôÀ» ½Ã Äù½ºÆ® Áö±Ş °¡´É
+	// í˜„ì¬ ìœ ì €ì˜ ê°€ë°© ë“±ê¸‰ ì²´í¬
+	// ë“±ê¸‰ì˜ ìˆ«ìê°€ í•´ë‹¹ ì»¬ëŸ¼ ê°’ê³¼ ê°™ê±°ë‚˜ ë†’ì„ ì‹œ í€˜ìŠ¤íŠ¸ ì§€ê¸‰ ê°€ëŠ¥
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Condition")
 		int32 MinInventoryGrade;
 
-	// ÇöÀç À¯ÀúÀÇ °¡¹æ µî±Ş Ã¼Å©
-	// GradeÀÇ ¼ıÀÚ°¡ ÇØ´ç ÄÃ·³º¸´Ù ³ôÀ» ½Ã Áö±Ş ºÒ°¡
+	// í˜„ì¬ ìœ ì €ì˜ ê°€ë°© ë“±ê¸‰ ì²´í¬
+	// Gradeì˜ ìˆ«ìê°€ í•´ë‹¹ ì»¬ëŸ¼ë³´ë‹¤ ë†’ì„ ì‹œ ì§€ê¸‰ ë¶ˆê°€
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Condition")
 		int32 MaxInventoryGrade;
 
-	// Æ¯Á¤ Äù½ºÆ® Å¬¸®¾î ¿©ºÎ (Quest ID ÀÔ·Â)
+	// íŠ¹ì • í€˜ìŠ¤íŠ¸ í´ë¦¬ì–´ ì—¬ë¶€ (Quest ID ì…ë ¥)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Condition")
 		int32 QuestClear;
 
-	// À§ Äù½ºÆ® Å¬¸®¾î È½¼ö
+	// ìœ„ í€˜ìŠ¤íŠ¸ í´ë¦¬ì–´ íšŸìˆ˜
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Condition")
 		int32 QuestClearCount;
 
-	// µîÀå ºñÀ²
+	// ë“±ì¥ ë¹„ìœ¨
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeliveryQuest_Condition")
 		int32 Rate;
 };

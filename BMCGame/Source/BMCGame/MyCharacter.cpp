@@ -64,8 +64,6 @@ AMyCharacter::AMyCharacter()
 	GetCharacterMovement()->MaxWalkSpeed = WalkMaxSpeed;
 
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("ABPlayer"));
-
-	
 }
 
 // Called when the game starts or when spawned
@@ -80,10 +78,11 @@ void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// test
+	////////// TODO test
 	SpringArm->SetRelativeRotation(CameraRotator);
 	SpringArm->TargetArmLength = CameraDistance;
 	GetCharacterMovement()->MaxWalkSpeed = WalkMaxSpeed;
+	////////// test
 
 	if (DirectionToMove.SizeSquared() > 0.0f)
 	{
