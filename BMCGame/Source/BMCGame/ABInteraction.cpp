@@ -2,7 +2,6 @@
 
 
 #include "ABInteraction.h"
-#include <Blueprint/UserWidget.h>
 #include "Components/SphereComponent.h"
 #include "MyCharacter.h"
 
@@ -14,24 +13,14 @@ AABInteraction::AABInteraction()
 
 	Trigger = CreateDefaultSubobject<USphereComponent>(TEXT("TRIGGER"));
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MESH"));
-	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("INTERACTION_UI"));
 
 	RootComponent = Trigger;
 	Mesh->SetupAttachment(RootComponent);
-	InteractionWidget->SetupAttachment(RootComponent);
+
 
 	Trigger->SetCollisionProfileName(TEXT("Interaction"));
 	Mesh->SetCollisionProfileName(TEXT("BlockAll"));
 
-	InteractionWidget->SetRelativeLocation(FVector(0.0f, 0.0f, 180.0f));
-	InteractionWidget->SetWidgetSpace(EWidgetSpace::Screen);
-	static  ConstructorHelpers::FClassFinder<UUserWidget> UI_HUD(TEXT("/Game/Dummy/UMG/UMG_Interaction"));
-	if (UI_HUD.Succeeded())
-	{
-		InteractionWidget->SetWidgetClass(UI_HUD.Class);
-		InteractionWidget->SetDrawSize(FVector2D(150.0f, 50.0f));
-		InteractionWidget->SetVisibility(false);
-	}
 }
 
 void AABInteraction::PostInitializeComponents()
@@ -72,3 +61,13 @@ void AABInteraction::OnInteraction()
 {
 	UE_LOG(LogTemp, Warning, TEXT("OnInteraction In ABInteraction"));
 }
+
+
+//상호작용 오브젝트 오브젝트 타입 스트링으로 출력
+FString AABInteraction::GetInteractionType()
+{
+	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("InteractionType"), true);
+	if (!EnumPtr) return FString("Invalid");
+	return EnumPtr->GetNameStringByIndex((int32)interactiontype);
+}
+
