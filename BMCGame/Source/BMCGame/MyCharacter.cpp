@@ -3,6 +3,7 @@
 
 #include "MyCharacter.h"
 #include <Blueprint/UserWidget.h>
+#include "UI_InteractionKey.h"
 #include "Components/SceneComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -40,7 +41,7 @@ AMyCharacter::AMyCharacter()
 		GetMesh()->SetAnimInstanceClass(WARRIOR_ANIM.Class);
 	}
 
-	static  ConstructorHelpers::FClassFinder<UUserWidget> UI_HUD(TEXT("/Game/Dummy/UMG/UMG_Interaction"));
+	static  ConstructorHelpers::FClassFinder<UUI_InteractionKey> UI_HUD(TEXT("/Game/Dummy/UMG/UMG_Interaction"));
 	if (UI_HUD.Succeeded())
 	{
 		InteractionWidget->SetWidgetClass(UI_HUD.Class);
@@ -64,7 +65,7 @@ AMyCharacter::AMyCharacter()
 
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("ABPlayer"));
 
-	//
+	
 }
 
 // Called when the game starts or when spawned
@@ -108,13 +109,21 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 void AMyCharacter::OnInteractionStart(AABInteraction* interaction)
 {
 	interactionObj = interaction;
+	
 	UE_LOG(LogTemp, Warning, TEXT("OnInteractionStart : %s"), *interactionObj->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("InteractionType:%s"), *interactionObj->GetInteractionType());
+	
+	
+	//상호작용 UI 켜기
+	
 	InteractionWidget->SetVisibility(true);
+	
 }
 
 void AMyCharacter::OnInteractionEnd()
 {
 	interactionObj = NULL;
+	//상호작용 UI 끄기
 	InteractionWidget->SetVisibility(false);
 }
 

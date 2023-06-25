@@ -54,6 +54,7 @@ public:
 	//인터렉션 UI 추가
 	UPROPERTY(VisibleAnywhere, Category = UI)
 		class UWidgetComponent* InteractionWidget;
+	
 
 
 private:
