@@ -48,7 +48,8 @@ AMyCharacter::AMyCharacter()
 		InteractionWidget->SetDrawSize(FVector2D(140.0f, 20.0f));
 		InteractionWidget->SetVisibility(false);
 	}
-
+	InteractionWidget->InitWidget();
+	InteractionKey = Cast<UUI_InteractionKey>(InteractionWidget->GetUserWidgetObject());
 	SpringArm->TargetArmLength = CameraDistance;
 	SpringArm->SetRelativeRotation(CameraRotator);
 	SpringArm->bUsePawnControlRotation = false;
@@ -96,7 +97,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	// wasd ÀÌµ¿
+	// wasd ï¿½Ìµï¿½
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::UpDown);
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::LeftRight);
 	
@@ -113,8 +114,8 @@ void AMyCharacter::OnInteractionStart(AABInteraction* interaction)
 	UE_LOG(LogTemp, Warning, TEXT("InteractionType:%s"), *interactionObj->GetInteractionType());
 	
 	
-	//»óÈ£ÀÛ¿ë UI ÄÑ±â
-	
+	//ï¿½ï¿½È£ï¿½Û¿ï¿½ UI ï¿½Ñ±ï¿½
+	InteractionKey->SetInteractionKey(interactionObj->interactiontype);
 	InteractionWidget->SetVisibility(true);
 	
 }
@@ -122,7 +123,7 @@ void AMyCharacter::OnInteractionStart(AABInteraction* interaction)
 void AMyCharacter::OnInteractionEnd()
 {
 	interactionObj = NULL;
-	//»óÈ£ÀÛ¿ë UI ²ô±â
+	//ï¿½ï¿½È£ï¿½Û¿ï¿½ UI ï¿½ï¿½ï¿½
 	InteractionWidget->SetVisibility(false);
 }
 
@@ -140,7 +141,7 @@ void AMyCharacter::LeftRight(float NewAxisValue)
 
 void AMyCharacter::OnInteraction()
 {
-	// ÇöÀç Ãæµ¹ÁßÀÎ »óÈ£ÀÛ¿ë ¿ÀºêÁ§Æ®¿¡ ½ÅÈ£
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È£
 	if (interactionObj != NULL)
 	{
 		interactionObj->OnInteraction();

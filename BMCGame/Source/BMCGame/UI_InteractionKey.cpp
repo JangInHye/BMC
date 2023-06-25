@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI_InteractionKey.h"
@@ -19,9 +19,9 @@ void UUI_InteractionKey::SetInteractionKey(InteractionType type)
 {
 	if (type==InteractionType::DOOR)	
 	{
-		Interaction_ToolTip->SetText(FText::FromString("TEST"));
+		Interaction_ToolTip->SetText(FText::FromString(TEXT("사무실 나가기")));
 		UE_LOG(LogTemp, Warning, TEXT("Interaction Type: Door"))
-		
+
 	};
 
 }
