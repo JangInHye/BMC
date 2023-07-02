@@ -23,6 +23,12 @@ void UUI_InteractionKey::SetInteractionKey(InteractionType type)
 		UE_LOG(LogTemp, Warning, TEXT("Interaction Type: Door"))
 
 	};
+	if (type == InteractionType::STORAGE)
+	{
+		Interaction_ToolTip->SetText(FText::FromString(TEXT("창고 열기")));
+		UE_LOG(LogTemp, Warning, TEXT("Interaction Type: Storage"))
+
+	}
 
 }
 
