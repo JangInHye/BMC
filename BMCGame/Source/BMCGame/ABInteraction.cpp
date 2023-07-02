@@ -30,40 +30,40 @@ void AABInteraction::PostInitializeComponents()
 	Trigger->OnComponentEndOverlap.AddDynamic(this, &AABInteraction::OnEndCharacterOverlap);
 }
 
-// Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ Ã³ï¿½ï¿½
-// ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½â¼­ UI ï¿½ï¿½ï¿½ï¿½Ö±ï¿½.
+//Æ®¸®°Å Ãæµ¹ ½Ã Ã³¸® 
+//»óÈ£ÀÛ¿ë °¡´ÉÇÏ¸é ¿©±â¼­ UI ¶ç¿öÁÖ±â
 void AABInteraction::OnBeginCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Warning, TEXT("OnBeginCharacterOverlap"));
 
-	// ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½
+	// ÇÃ·¹ÀÌ¾î¿¡ ÇöÀç Ãæµ¹ÁßÀÎ »óÈ£ÀÛ¿ë ¿ÀºêÁ§Æ® Á¤º¸ ³Ñ±â±â
 	AMyCharacter* myChar = (AMyCharacter*)OtherActor;
 	myChar->OnInteractionStart(this);
 
 
 }
 
-// Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã³ï¿½ï¿½
-// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ UIï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+// Æ®¸®°Å Ãæµ¹ Á¾·á ½Ã Ã³¸®
+// À§¿¡ ¶ç¿öÁØ UI°¡ ÀÖ´Ù¸é Áö¿ì±â
 void AABInteraction::OnEndCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	UE_LOG(LogTemp, Warning, TEXT("OnEndCharacterOverlap"));
 
-	// ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½Ë·ï¿½ï¿½Ö±ï¿½
+	// ÇÃ·¹ÀÌ¾î¿¡ Ãæµ¹ ³¡³µ´Ù°í ¾Ë·ÁÁÖ±â
 	AMyCharacter* myChar = (AMyCharacter*)OtherActor;
 	myChar->OnInteractionEnd();
 
 
 }
 
-// E Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã³ï¿½ï¿½
+// E Å°¸¦ ´­·¶À» ¶§ Ã³¸®
 void AABInteraction::OnInteraction()
 {
 	UE_LOG(LogTemp, Warning, TEXT("OnInteraction In ABInteraction"));
 }
 
 
-//ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Å¸ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+//»óÈ£ÀÛ¿ë ¿ÀºêÁ§Æ® ¿ÀºêÁ§Æ® Å¸ÀÔ ½ºÆ®¸µÀ¸·Î Ãâ·Â
 FString AABInteraction::GetInteractionType()
 {
 	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("InteractionType"), true);

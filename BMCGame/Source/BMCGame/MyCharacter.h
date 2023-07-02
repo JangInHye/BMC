@@ -32,10 +32,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½
-	// ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
+	// ÇöÀç Ãæµ¹ ÁßÀÎ »óÈ£ÀÛ¿ë ¿ÀºêÁ§Æ®¿¡¼­ È£ÃâÇÔ
+	// Ãæµ¹ ½ÃÀÛ
 	void OnInteractionStart(AABInteraction* interaction);
-	// ï¿½æµ¹ ï¿½ï¿½
+	//Ãæµ¹ ³¡
 	void OnInteractionEnd();
 
 	UPROPERTY(VisibleAnywhere, Category = Camera)
@@ -48,11 +48,11 @@ public:
 	UPROPERTY(EditAnywhere, Category = Camera)
 		float CameraDistance = 800.0f;
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
-		float MoveSpeed = 0.5f;			// -1~1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½
+		float MoveSpeed = 0.5f;			// -1~1 »çÀÌÀÇ °ªÀÌ¿©¾ß ÇÔ
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
 		float WalkMaxSpeed = 600.0f;
 
-	//ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ UI ï¿½ß°ï¿½
+	//ÀÎÅÍ·º¼Ç UI Ãß°¡
 	UPROPERTY(VisibleAnywhere, Category = UI)
 		class UWidgetComponent* InteractionWidget;
 	UPROPERTY(VisibleAnywhere, Category = UI)
@@ -62,7 +62,7 @@ public:
 
 private:
 	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
-	AABInteraction* interactionObj;		// ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	AABInteraction* interactionObj;		// »óÈ£ÀÛ¿ë ¿ÀºêÁ§Æ®°¡ 1°³¶ó´Â ÀüÁ¦
 
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);

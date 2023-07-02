@@ -97,7 +97,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	// wasd ï¿½Ìµï¿½
+	// wasd ÀÌµ¿
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::UpDown);
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::LeftRight);
 	
@@ -114,7 +114,7 @@ void AMyCharacter::OnInteractionStart(AABInteraction* interaction)
 	UE_LOG(LogTemp, Warning, TEXT("InteractionType:%s"), *interactionObj->GetInteractionType());
 	
 	
-	//ï¿½ï¿½È£ï¿½Û¿ï¿½ UI ï¿½Ñ±ï¿½
+	//ÇöÀç Ãæµ¹ÁßÀÎ »óÃÊÀÛ¿ë ¿ÀºêÁ§Æ®¿¡ ½ÅÈ£
 	InteractionKey->SetInteractionKey(interactionObj->interactiontype);
 	InteractionWidget->SetVisibility(true);
 	
@@ -123,7 +123,7 @@ void AMyCharacter::OnInteractionStart(AABInteraction* interaction)
 void AMyCharacter::OnInteractionEnd()
 {
 	interactionObj = NULL;
-	//ï¿½ï¿½È£ï¿½Û¿ï¿½ UI ï¿½ï¿½ï¿½
+	//»óÈ£ÀÛ¿ë UI ²ô±â
 	InteractionWidget->SetVisibility(false);
 }
 
@@ -141,7 +141,7 @@ void AMyCharacter::LeftRight(float NewAxisValue)
 
 void AMyCharacter::OnInteraction()
 {
-	// ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È£
+	// ÇöÀç Ãæµ¹ÁßÀÎ »óÈ£ÀÛ¿ë ¿ÀºêÁ§Æ®¿¡ ½ÅÈ£
 	if (interactionObj != NULL)
 	{
 		interactionObj->OnInteraction();
