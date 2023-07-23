@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "InteractionStorage.h"
-#include "MyCharacter.h"
+#include "../InteractionItem/InteractionStorage.h"
+#include "../MyCharacter.h"
 
 AInteractionStorage::AInteractionStorage()
 {
@@ -19,4 +19,8 @@ void AInteractionStorage::OnEndCharacterOverlap(UPrimitiveComponent* OverlappedC
 {
 	AMyCharacter* myChar = (AMyCharacter*)OtherActor;
 	myChar->OnInteractionEnd();
+}
+
+void AInteractionStorage::OnInteraction()
+{
 }

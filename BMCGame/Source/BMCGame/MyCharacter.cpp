@@ -3,7 +3,7 @@
 
 #include "MyCharacter.h"
 #include <Blueprint/UserWidget.h>
-#include "UI_InteractionKey.h"
+#include "UI/UI_InteractionKey.h"
 #include "Components/SceneComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"

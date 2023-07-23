@@ -2,7 +2,7 @@
 
 
 #include "InteractionDoor.h"
-#include "MyCharacter.h"
+#include "../MyCharacter.h"
 
 
 AInteractionDoor::AInteractionDoor()

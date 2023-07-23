@@ -3,7 +3,7 @@
 
 #include "ABInteraction.h"
 #include "Components/SphereComponent.h"
-#include "MyCharacter.h"
+#include "../MyCharacter.h"
 
 // Sets default values
 AABInteraction::AABInteraction()

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ABInteraction.h"
+#include "../InteractionItem/ABInteraction.h"
 #include "Components/TextBlock.h"
 #include "Blueprint/UserWidget.h"
 #include "UI_InteractionKey.generated.h"

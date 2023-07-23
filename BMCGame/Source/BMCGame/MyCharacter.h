@@ -6,9 +6,9 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
-#include "ABInteraction.h"
+#include "InteractionItem/ABInteraction.h"
 #include "Components/WidgetComponent.h"
-#include "UI_InteractionKey.h"
+#include "UI/UI_InteractionKey.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
