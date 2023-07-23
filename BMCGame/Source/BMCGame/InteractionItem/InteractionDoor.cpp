@@ -3,6 +3,7 @@
 
 #include "InteractionDoor.h"
 #include "../MyCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
 
 AInteractionDoor::AInteractionDoor()
@@ -16,8 +17,16 @@ void AInteractionDoor::OnBeginCharacterOverlap(UPrimitiveComponent* OverlappedCo
 	myChar->OnInteractionStart(this);
 }
 
+
 void AInteractionDoor::OnEndCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	AMyCharacter* myChar = (AMyCharacter*)OtherActor;
 	myChar->OnInteractionEnd();
 }
+
+// E 키를 눌렀을 때 처리
+void AInteractionDoor::OnInteraction()
+{
+	UGameplayStatics::OpenLevel(this, TEXT("DeliveryLevel"));
+}
+

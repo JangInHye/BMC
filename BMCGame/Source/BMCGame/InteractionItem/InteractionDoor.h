@@ -16,6 +16,8 @@ class BMCGAME_API AInteractionDoor : public AABInteraction
 
 public:
 	AInteractionDoor();
+
+		virtual void OnInteraction();
 private:
 	virtual void OnBeginCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)override;
 	virtual void OnEndCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)override;
