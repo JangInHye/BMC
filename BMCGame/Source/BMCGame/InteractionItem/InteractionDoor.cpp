@@ -27,6 +27,16 @@ void AInteractionDoor::OnEndCharacterOverlap(UPrimitiveComponent* OverlappedComp
 // E 키를 눌렀을 때 처리
 void AInteractionDoor::OnInteraction()
 {
-	UGameplayStatics::OpenLevel(this, TEXT("DeliveryLevel"));
+	switch (_moveToLevel)
+	{
+		case EMoveToLevel::E_Office:
+		UGameplayStatics::OpenLevel(this, TEXT("OfficeLevel"));
+		break;
+		case EMoveToLevel::E_Delivery:
+		UGameplayStatics::OpenLevel(this, TEXT("DeliveryLevel"));
+		break;
+		default:
+			break;
+	}
 }
 

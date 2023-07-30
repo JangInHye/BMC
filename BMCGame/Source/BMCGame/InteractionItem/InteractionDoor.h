@@ -6,6 +6,15 @@
 #include "../InteractionItem/ABInteraction.h"
 #include "InteractionDoor.generated.h"
 
+	/// <summary>
+	/// 이동하는 위치
+	/// </summary>
+UENUM(BlueprintType)
+enum class EMoveToLevel : uint8
+{
+	E_Office UMETA(DisplayName = "Move To Office"),
+	E_Delivery UMETA(DisplayName = "Move To Delivery"),
+};
 /**
  * 
  */
@@ -19,7 +28,9 @@ public:
 
 		virtual void OnInteraction();
 private:
+	UPROPERTY(EditAnywhere, Category = Camera)
+		EMoveToLevel _moveToLevel = EMoveToLevel::E_Office;
+
 	virtual void OnBeginCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)override;
 	virtual void OnEndCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)override;
-	
 };
