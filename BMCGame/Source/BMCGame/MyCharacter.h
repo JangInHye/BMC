@@ -9,6 +9,7 @@
 #include "InteractionItem/ABInteraction.h"
 #include "Components/WidgetComponent.h"
 #include "UI/UI_InteractionKey.h"
+#include "UI_Inveotory.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
@@ -53,10 +54,21 @@ public:
 		float WalkMaxSpeed = 600.0f;
 
 	//인터렉션 UI 추가
-	UPROPERTY(VisibleAnywhere, Category = UI)
+	UPROPERTY(VisibleAnywhere, Category = UI_interaction)
 		class UWidgetComponent* InteractionWidget;
-	UPROPERTY(VisibleAnywhere, Category = UI)
+	UPROPERTY(VisibleAnywhere, Category = UI_interaction)
 		class UUI_InteractionKey* InteractionKey;
+
+	//인벤토리 창 상태확인 (Open/Close)
+	UPROPERTY(VisibleAnywhere, Category = Inventory)
+		bool isInventoryActive = false;
+	//인벤토리 UI 추가
+	UPROPERTY(VisibleAnywhere, Category = Inventory)
+		class UWidgetComponent* InventoryWidget;
+	UPROPERTY(VisibleAnywhere, Category = Inventory)
+		class UUI_Inveotory* Inventory;
+
+
 	
 
 
@@ -67,4 +79,5 @@ private:
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);
 	void OnInteraction();
+	void ToggleInventoryActivation();
 };
