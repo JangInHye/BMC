@@ -12,6 +12,7 @@ struct FQuestTableBase : public FTableRowBase
 {
 	GENERATED_BODY()
 public:
+	// 시트 아이디
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "QuestBase")
 		int32 ID;
 };

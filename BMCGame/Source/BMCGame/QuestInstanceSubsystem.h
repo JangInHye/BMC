@@ -9,6 +9,7 @@
 #include "FDeliveryQuestTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "QuestInstanceSubsystem.generated.h"
+using namespace std;
 //
 //struct QuestDataStruct
 //{
@@ -35,5 +36,10 @@ public:
 private:
 	UTableInstanceSubsystem* _tableSubSystem;
 	UPlayerDataInstanceSubsystem* _playerData;
-	std::vector<FDeliveryQuestTable> _questVector;
+	vector<int> _questVector;
+	int _maxQuestCount;
+
+	vector<int> GetListup(bool isSpecial);
+	void SelectQuest(vector<int> listupQuest);
+	void RemoveExpiryQuest();
 };
