@@ -20,13 +20,13 @@ AMyCharacter::AMyCharacter()
 
 	SpringArm->SetupAttachment(GetCapsuleComponent());
 	Camera->SetupAttachment(SpringArm);
-	InteractionWidget->SetupAttachment(RootComponent);
-	InventoryWidget->SetupAttachment(RootComponent);
+	InteractionWidget->SetupAttachment(GetCapsuleComponent());
+	InventoryWidget->SetupAttachment(GetCapsuleComponent());
 
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -88.0f), FRotator(0.0f, -90.0f, 0.0f));
 	SpringArm->TargetArmLength = 400.0f;
 	SpringArm->SetRelativeRotation(FRotator(-15.0f, 0.0f, 0.0f));
-	InteractionWidget->SetRelativeLocation(FVector(0.0f,0.0f,130.0f));
+	InteractionWidget->SetRelativeLocation(FVector(0.0f,0.0f,150.0f));
 	InteractionWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	InventoryWidget->SetWidgetSpace(EWidgetSpace::Screen);
 
@@ -48,7 +48,7 @@ AMyCharacter::AMyCharacter()
 	if (UI_InteractionHUD.Succeeded())
 	{
 		InteractionWidget->SetWidgetClass(UI_InteractionHUD.Class);
-		InteractionWidget->SetDrawSize(FVector2D(140.0f, 20.0f));
+		InteractionWidget->SetDrawSize(FVector2D(140.0f, 40.0f));
 		InteractionWidget->SetVisibility(false);
 	}
 
@@ -56,7 +56,7 @@ AMyCharacter::AMyCharacter()
 	if(UI_InventoryHUD.Succeeded())
 	{
 		InventoryWidget->SetWidgetClass(UI_InventoryHUD.Class);
-		InteractionWidget->SetDrawSize(FVector2D(600.0f, 600.0f));
+		InventoryWidget->SetDrawSize(FVector2D(600.0f, 600.0f));
 		InventoryWidget->SetVisibility(false);
 	}
 
