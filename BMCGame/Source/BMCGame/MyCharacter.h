@@ -44,6 +44,8 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		UCameraComponent* Camera;
 
+	UPROPERTY(EditAnywhere, Category = MyCharacter)
+		FVector CameraLocation = FVector(0.0f, 0.0f, 0.0f);		// 앞뒤 / 좌우 / 위아래
 	UPROPERTY(EditAnywhere, Category = Camera)
 		FRotator CameraRotator = FRotator(-55.0f, 0.0f, 0.0f);
 	UPROPERTY(EditAnywhere, Category = Camera)

@@ -23,9 +23,10 @@ AMyCharacter::AMyCharacter()
 	InteractionWidget->SetupAttachment(GetCapsuleComponent());
 	InventoryWidget->SetupAttachment(GetCapsuleComponent());
 
+	// Character modeling setting
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -88.0f), FRotator(0.0f, -90.0f, 0.0f));
-	SpringArm->TargetArmLength = 400.0f;
-	SpringArm->SetRelativeRotation(FRotator(-15.0f, 0.0f, 0.0f));
+
+	// interaction UI setting
 	InteractionWidget->SetRelativeLocation(FVector(0.0f,0.0f,150.0f));
 	InteractionWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	InventoryWidget->SetWidgetSpace(EWidgetSpace::Screen);
@@ -64,8 +65,11 @@ AMyCharacter::AMyCharacter()
 	InteractionKey = Cast<UUI_InteractionKey>(InteractionWidget->GetUserWidgetObject());
 	InventoryWidget->InitWidget();
 	Inventory = Cast<UUI_Inveotory>(InventoryWidget->GetUserWidgetObject());
-	SpringArm->TargetArmLength = CameraDistance;
-	SpringArm->SetRelativeRotation(CameraRotator);
+
+	// camera setting
+	SpringArm->TargetArmLength = CameraDistance;				// 카메라 거리
+	SpringArm->SetRelativeRotation(CameraRotator);				// 카메라 각도
+	SpringArm->SetRelativeLocation(CameraLocation);				// 카메라 위치
 	//SpringArm->bUsePawnControlRotation = false;			// 쿼터뷰 고정
 	//SpringArm->bInheritPitch = false;
 	//SpringArm->bInheritRoll = false;
