@@ -66,11 +66,16 @@ AMyCharacter::AMyCharacter()
 	Inventory = Cast<UUI_Inveotory>(InventoryWidget->GetUserWidgetObject());
 	SpringArm->TargetArmLength = CameraDistance;
 	SpringArm->SetRelativeRotation(CameraRotator);
-	SpringArm->bUsePawnControlRotation = false;
-	SpringArm->bInheritPitch = false;
-	SpringArm->bInheritRoll = false;
-	SpringArm->bInheritYaw = false;
-	SpringArm->bDoCollisionTest = false;
+	//SpringArm->bUsePawnControlRotation = false;			// 쿼터뷰 고정
+	//SpringArm->bInheritPitch = false;
+	//SpringArm->bInheritRoll = false;
+	//SpringArm->bInheritYaw = false;
+	//SpringArm->bDoCollisionTest = false;
+	SpringArm->bUsePawnControlRotation = true;
+	SpringArm->bInheritPitch = true;
+	SpringArm->bInheritRoll = true;
+	SpringArm->bInheritYaw = true;
+	SpringArm->bDoCollisionTest = true;
 	bUseControllerRotationYaw = false;
 
 	GetCharacterMovement()->bOrientRotationToMovement = false;
@@ -114,6 +119,9 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	// wasd 이동
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::UpDown);
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::LeftRight);
+	// 마우스 회전
+	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &AMyCharacter::LookUp);
+	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &AMyCharacter::Turn);
 	
 	// interaction E키
 	PlayerInputComponent->BindAction(TEXT("Interaction"), EInputEvent::IE_Pressed, this, &AMyCharacter::OnInteraction);
@@ -147,14 +155,30 @@ void AMyCharacter::OnInteractionEnd()
 
 void AMyCharacter::UpDown(float NewAxisValue)
 {
-	DirectionToMove.X = NewAxisValue;
+	//DirectionToMove.X = NewAxisValue;		//쿼터뷰 고정
+	AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X), NewAxisValue);
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
 }
 
 void AMyCharacter::LeftRight(float NewAxisValue)
 {
-	DirectionToMove.Y = NewAxisValue;
+	//DirectionToMove.Y = NewAxisValue;		//쿼터뷰 고정
+	AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::Y), NewAxisValue);
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
+}
+
+void AMyCharacter::LookUp(float NewAxisValue)
+{
+	float value = -NewAxisValue * TurnSpeed;
+	if (AxisUpDownValue + value < MinAxisUpDown 
+		|| MaxAxisUpDown < AxisUpDownValue + value) return;		// 위아래 카메라 이동은 최소,최대 막아뒀음
+	AxisUpDownValue += value;
+	AddControllerPitchInput(value);
+}
+
+void AMyCharacter::Turn(float NewAxisValue)
+{
+	AddControllerYawInput(NewAxisValue * TurnSpeed);
 }
 
 void AMyCharacter::OnInteraction()

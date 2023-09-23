@@ -52,6 +52,12 @@ public:
 		float MoveSpeed = 0.5f;			// -1~1 사이의 값이여야 함
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
 		float WalkMaxSpeed = 600.0f;
+	UPROPERTY(EditAnywhere, Category = MyCharacter)
+		float TurnSpeed = 0.5f;
+	UPROPERTY(EditAnywhere, Category = MyCharacter)
+		float MaxAxisUpDown = 25.0f;
+	UPROPERTY(EditAnywhere, Category = MyCharacter)
+		float MinAxisUpDown = -15.0f;
 
 	//인터렉션 UI 추가
 	UPROPERTY(VisibleAnywhere, Category = UI_interaction)
@@ -75,9 +81,12 @@ public:
 private:
 	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
 	AABInteraction* interactionObj;		// 상호작용 오브젝트가 1개라는 전제
+	float AxisUpDownValue = 0.0f;
 
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);
+	void LookUp(float NewAxisValue);
+	void Turn(float NewAxisValue);
 	void OnInteraction();
 	void ToggleInventoryActivation();
 };
