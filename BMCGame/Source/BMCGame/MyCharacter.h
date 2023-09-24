@@ -53,7 +53,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
 		float MoveSpeed = 0.5f;			// -1~1 사이의 값이여야 함
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
-		float WalkMaxSpeed = 300.0f;
+		float WalkMaxSpeed = 350.0f;
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
 		float TurnSpeed = 0.5f;
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
