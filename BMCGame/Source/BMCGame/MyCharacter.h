@@ -45,15 +45,15 @@ public:
 		UCameraComponent* Camera;
 
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
-		FVector CameraLocation = FVector(0.0f, 0.0f, 0.0f);		// 앞뒤 / 좌우 / 위아래
+		FVector CameraLocation = FVector(0.0f, 0.0f, 90.0f);		// 앞뒤 / 좌우 / 위아래
 	UPROPERTY(EditAnywhere, Category = Camera)
 		FRotator CameraRotator = FRotator(-55.0f, 0.0f, 0.0f);
 	UPROPERTY(EditAnywhere, Category = Camera)
-		float CameraDistance = 1100.0f;
+		float CameraDistance = 700.0f;
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
 		float MoveSpeed = 0.5f;			// -1~1 사이의 값이여야 함
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
-		float WalkMaxSpeed = 600.0f;
+		float WalkMaxSpeed = 300.0f;
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
 		float TurnSpeed = 0.5f;
 	UPROPERTY(EditAnywhere, Category = MyCharacter)
