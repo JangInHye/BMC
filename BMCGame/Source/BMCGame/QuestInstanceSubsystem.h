@@ -39,7 +39,7 @@ private:
 	vector<int> _questVector;
 	int _maxQuestCount;
 
-	vector<int> GetListup(bool isSpecial);
+	void GetListup(bool isSpecial, vector<int>& resultList);
 	void SelectQuest(vector<int> listupQuest);
 	void RemoveExpiryQuest();
 };

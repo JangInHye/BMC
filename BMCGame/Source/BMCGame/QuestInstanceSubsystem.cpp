@@ -47,6 +47,11 @@ FDeliveryQuestTable UQuestInstanceSubsystem::GetQuest(int index)
 /// </summary>
 void UQuestInstanceSubsystem::SetQuestList()
 {
+	// @NOTE : 프로토 타입용
+	vector<int> protoQuestList;
+	GetListup(true, protoQuestList);
+	_questVector.insert(_questVector.end(), protoQuestList.begin(), protoQuestList.end());
+	/*
 	// 날짜가 지난 퀘스트 제거
 	RemoveExpiryQuest();
 
@@ -62,6 +67,7 @@ void UQuestInstanceSubsystem::SetQuestList()
 	// 리스트업 된 퀘스트 중에서 실지급할 택배 채택
 	vector<int> normalDeliveryList = GetListup(false);
 	SelectQuest(normalDeliveryList);
+*/
 }
 
 /// <summary>
@@ -69,14 +75,12 @@ void UQuestInstanceSubsystem::SetQuestList()
 /// </summary>
 /// <param name="isSpecial"></param>
 /// <returns></returns>
-vector<int> UQuestInstanceSubsystem::GetListup(bool isSpecial)
+void UQuestInstanceSubsystem::GetListup(bool isSpecial, vector<int>& resultList)
 {
-	vector<int> resultList;
-
 	int curDay = _playerData->GetCurDay();
 	int curInvenGrade = _playerData->GetCurInvenGrade();
 
-	if (_tableSubSystem == nullptr || _tableSubSystem->DeliveryQuestTable == nullptr) return resultList;
+	if (_tableSubSystem == nullptr || _tableSubSystem->DeliveryQuestTable == nullptr) return;
 	TArray<FName> RowNames = _tableSubSystem->DeliveryQuestTable->GetRowNames();
 	for (int i = 0; i < RowNames.Num(); i++)
 	{
@@ -84,6 +88,10 @@ vector<int> UQuestInstanceSubsystem::GetListup(bool isSpecial)
 		FDeliveryQuestTable* questTableRow = (FDeliveryQuestTable*)_tableSubSystem->GetRowByName(ETableType::E_Default, RowNames[i]);
 		if (questTableRow == nullptr) continue;
 
+		// @NOTE : 프로토 타입에는 일단 전부 1개씩 넣고 사용
+		resultList.push_back(questTableRow->ID);
+
+		/*
 		// QuestType 1 일반택배
 		// QuestType 2 특급택배
 		if (isSpecial ? questTableRow->QuestType == 1 : questTableRow->QuestType == 2) continue;
@@ -116,8 +124,8 @@ vector<int> UQuestInstanceSubsystem::GetListup(bool isSpecial)
 		{
 			resultList.push_back(questTableRow->ID);
 		}
+		*/
 	}
-	return resultList;
 }
 
 /// <summary>

@@ -11,10 +11,11 @@
 UENUM(BlueprintType)
 enum class InteractionType : uint8
 {
-	NONE UMETA(FDisplayNameEntryId ="None"),
-	DOOR UMETA(FDisplayNameEntryId = "Door"),
-    BED UMETA(FDisplayNameEntryId = "Bed"),
-	STORAGE UMETA(FDisplayNameEntryId="Storage"),
+	NONE UMETA(FDisplayNameEntryId ="None"),				// Default
+	DOOR UMETA(FDisplayNameEntryId = "Door"),			// 지역 이동
+    BED UMETA(FDisplayNameEntryId = "Bed"),				// 하루 끝내기
+	STORAGE UMETA(FDisplayNameEntryId="Storage"),		// 창고
+	Target UMETA(FDisplayNameEntryId="Target"),			// 퀘스트 대상
 };
 
 
