@@ -18,7 +18,7 @@ class BMCGAME_API AInteractionTarget : public AABInteraction
 public:
 	AInteractionTarget();
 
-	UPROPERTY(VisibleAnywhere, Category = Interaction)
+	UPROPERTY(EditAnywhere, Category = Interaction)
 		int _myID;
 	
 	virtual void OnInteraction();
