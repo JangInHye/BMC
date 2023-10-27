@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "QuestInstanceSubsystem.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -38,6 +39,9 @@ public:
 	void OnInteractionStart(AABInteraction* interaction);
 	//충돌 끝
 	void OnInteractionEnd();
+
+	// 퀘스트 클리어하기
+	void QuestClear(int questID);
 
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		USpringArmComponent* SpringArm;
@@ -83,6 +87,7 @@ public:
 private:
 	FRotator CameraRotationRate = FRotator(0.0f, 720.0f, 0.0f);
 	AABInteraction* interactionObj;		// 상호작용 오브젝트가 1개라는 전제
+	UQuestInstanceSubsystem* _questInstance;
 	float AxisUpDownValue = 0.0f;
 
 	void UpDown(float NewAxisValue);

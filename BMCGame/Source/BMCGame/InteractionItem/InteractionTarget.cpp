@@ -2,7 +2,6 @@
 
 
 #include "InteractionTarget.h"
-#include "../MyCharacter.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -13,22 +12,25 @@ AInteractionTarget::AInteractionTarget()
 
 void AInteractionTarget::OnBeginCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	AMyCharacter* myChar = (AMyCharacter*)OtherActor;
-	myChar->OnInteractionStart(this);
+	_myChar = (AMyCharacter*)OtherActor;
+	_myChar->OnInteractionStart(this);
 }
 
 
 void AInteractionTarget::OnEndCharacterOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	AMyCharacter* myChar = (AMyCharacter*)OtherActor;
-	myChar->OnInteractionEnd();
+	_myChar = (AMyCharacter*)OtherActor;
+	_myChar->OnInteractionEnd();
 }
 
 // E 키를 눌렀을 때 처리
 // 퀘스트 처리
 void AInteractionTarget::OnInteraction()
 {
+	if (_myChar == nullptr) return;
+
 	// 퀘스트 대상이 맞는지 체크
 
 	// 퀘스트 대상이라면 해당 퀘스트 처리
+	_myChar->QuestClear(_myID);
 }

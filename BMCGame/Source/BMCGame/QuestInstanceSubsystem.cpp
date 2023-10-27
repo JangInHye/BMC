@@ -69,6 +69,37 @@ void UQuestInstanceSubsystem::SetQuestList()
 	SelectQuest(normalDeliveryList);
 */
 }
+/// <summary>
+/// 진행 중인 퀘스트에 존재하는 지 체크
+/// </summary>
+/// <param name="questID"></param>
+/// <returns></returns>
+int UQuestInstanceSubsystem::IsQuestExist(int questID)
+{
+	for (int i = 0; i < _questVector.size(); i++)
+	{
+		if (_questVector[i] == questID) return i;
+	}
+
+	return -1;
+}
+
+/// <summary>
+/// 퀘스트 클리어 처리
+/// </summary>
+/// <param name="questID"></param>
+void UQuestInstanceSubsystem::ClearQuest(int questID)
+{
+	// 퀘스트가 없다면 리턴
+	int idx = IsQuestExist(questID);
+	if (idx == -1) return;
+
+	// 클리어 가능한 지 체크
+	// @NOTE : 프로토에서는 조건 없이 클리어
+	
+	// 퀘스트 클리어 처리
+	_questVector.erase(_questVector.begin() + idx);
+}
 
 /// <summary>
 /// 지급할 택배 리스트업

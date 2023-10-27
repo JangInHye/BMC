@@ -15,7 +15,7 @@ enum class InteractionType : uint8
 	DOOR UMETA(FDisplayNameEntryId = "Door"),			// 지역 이동
     BED UMETA(FDisplayNameEntryId = "Bed"),				// 하루 끝내기
 	STORAGE UMETA(FDisplayNameEntryId="Storage"),		// 창고
-	Target UMETA(FDisplayNameEntryId="Target"),			// 퀘스트 대상
+	TARGET UMETA(FDisplayNameEntryId="Target"),			// 퀘스트 대상
 };
 
 

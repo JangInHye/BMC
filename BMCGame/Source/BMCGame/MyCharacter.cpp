@@ -157,6 +157,22 @@ void AMyCharacter::OnInteractionEnd()
 	InteractionWidget->SetVisibility(false);
 }
 
+/// <summary>
+/// 퀘스트 클리어
+/// </summary>
+/// <param name="questID"></param>
+void AMyCharacter::QuestClear(int questID)
+{
+	// 퀘스트 세팅
+	if (_questInstance == nullptr)
+	{
+		UGameInstance* GameInstance = GetGameInstance();
+		_questInstance = GameInstance->GetSubsystem<UQuestInstanceSubsystem>();
+	}
+
+	_questInstance->ClearQuest(questID);
+}
+
 void AMyCharacter::UpDown(float NewAxisValue)
 {
 	//DirectionToMove.X = NewAxisValue;		//쿼터뷰 고정
