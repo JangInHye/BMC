@@ -31,6 +31,21 @@ AMyCharacter::AMyCharacter()
 	InteractionWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	InventoryWidget->SetWidgetSpace(EWidgetSpace::Screen);
 
+	// player char Anim
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_CARDBOARD(TEXT("/Game/Dummy/Characters/Player/Namo.Namo"));
+	if (SK_CARDBOARD.Succeeded())
+	{
+		GetMesh()->SetSkeletalMesh(SK_CARDBOARD.Object);
+	}
+
+	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+
+	static ConstructorHelpers::FClassFinder<UAnimInstance> NAMO_ANIM(TEXT("/Game/Dummy/Characters/Player/Namo_Anim_BP"));
+	if (NAMO_ANIM.Succeeded())
+	{
+		GetMesh()->SetAnimInstanceClass(NAMO_ANIM.Class);
+	}
+	/*
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_CARDBOARD(TEXT("/Game/Dummy/Characters/Mannequins/Meshes/SKM_Manny"));
 	if (SK_CARDBOARD.Succeeded())
 	{
@@ -45,6 +60,12 @@ AMyCharacter::AMyCharacter()
 		GetMesh()->SetAnimInstanceClass(WARRIOR_ANIM.Class);
 	}
 
+	static ConstructorHelpers::FClassFinder<UAnimInstance> WARRIOR_ANIM(TEXT("/Game/Dummy/Characters/Mannequins/Animations/Manny/WarriorAnimBlueprint.WarriorAnimBlueprint_C"));
+	if (WARRIOR_ANIM.Succeeded())
+	{
+		GetMesh()->SetAnimInstanceClass(WARRIOR_ANIM.Class);
+	}
+	*/
 	static  ConstructorHelpers::FClassFinder<UUI_InteractionKey> UI_InteractionHUD(TEXT("/Game/Dummy/UMG/UMG_Interaction"));
 	if (UI_InteractionHUD.Succeeded())
 	{
