@@ -89,11 +89,14 @@ private:
 	AABInteraction* interactionObj;		// 상호작용 오브젝트가 1개라는 전제
 	UQuestInstanceSubsystem* _questInstance;
 	float AxisUpDownValue = 0.0f;
+	bool IsRotateState = false;
 
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);
 	void LookUp(float NewAxisValue);
 	void Turn(float NewAxisValue);
 	void OnInteraction();
+	void OnCameraRotate();
+	void OnCameraRotateEnd();
 	void ToggleInventoryActivation();
 };

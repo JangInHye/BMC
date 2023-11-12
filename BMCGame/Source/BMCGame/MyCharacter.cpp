@@ -45,27 +45,7 @@ AMyCharacter::AMyCharacter()
 	{
 		GetMesh()->SetAnimInstanceClass(NAMO_ANIM.Class);
 	}
-	/*
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_CARDBOARD(TEXT("/Game/Dummy/Characters/Mannequins/Meshes/SKM_Manny"));
-	if (SK_CARDBOARD.Succeeded())
-	{
-		GetMesh()->SetSkeletalMesh(SK_CARDBOARD.Object);
-	}
 
-	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
-
-	static ConstructorHelpers::FClassFinder<UAnimInstance> WARRIOR_ANIM(TEXT("/Game/Dummy/Characters/Mannequins/Animations/Manny/WarriorAnimBlueprint.WarriorAnimBlueprint_C"));
-	if (WARRIOR_ANIM.Succeeded())
-	{
-		GetMesh()->SetAnimInstanceClass(WARRIOR_ANIM.Class);
-	}
-
-	static ConstructorHelpers::FClassFinder<UAnimInstance> WARRIOR_ANIM(TEXT("/Game/Dummy/Characters/Mannequins/Animations/Manny/WarriorAnimBlueprint.WarriorAnimBlueprint_C"));
-	if (WARRIOR_ANIM.Succeeded())
-	{
-		GetMesh()->SetAnimInstanceClass(WARRIOR_ANIM.Class);
-	}
-	*/
 	static  ConstructorHelpers::FClassFinder<UUI_InteractionKey> UI_InteractionHUD(TEXT("/Game/Dummy/UMG/UMG_Interaction"));
 	if (UI_InteractionHUD.Succeeded())
 	{
@@ -91,11 +71,6 @@ AMyCharacter::AMyCharacter()
 	SpringArm->TargetArmLength = CameraDistance;				// 카메라 거리
 	SpringArm->SetRelativeRotation(CameraRotator);				// 카메라 각도
 	SpringArm->SetRelativeLocation(CameraLocation);				// 카메라 위치
-	//SpringArm->bUsePawnControlRotation = false;			// 쿼터뷰 고정
-	//SpringArm->bInheritPitch = false;
-	//SpringArm->bInheritRoll = false;
-	//SpringArm->bInheritYaw = false;
-	//SpringArm->bDoCollisionTest = false;
 	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->bInheritPitch = true;
 	SpringArm->bInheritRoll = true;
@@ -103,7 +78,7 @@ AMyCharacter::AMyCharacter()
 	SpringArm->bDoCollisionTest = true;
 	bUseControllerRotationYaw = false;
 
-	GetCharacterMovement()->bOrientRotationToMovement = false;
+	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->RotationRate = CameraRotationRate;
 	GetCharacterMovement()->MaxWalkSpeed = WalkMaxSpeed;
@@ -123,11 +98,9 @@ void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	////////// TODO test
 	SpringArm->SetRelativeRotation(CameraRotator);
 	SpringArm->TargetArmLength = CameraDistance;
 	GetCharacterMovement()->MaxWalkSpeed = WalkMaxSpeed;
-	////////// test
 
 	if (DirectionToMove.SizeSquared() > 0.0f)
 	{
@@ -145,6 +118,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::UpDown);
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::LeftRight);
 	// 마우스 회전
+	PlayerInputComponent->BindAction(TEXT("Camera_Rotate"), EInputEvent::IE_Pressed, this, &AMyCharacter::OnCameraRotate);
+	PlayerInputComponent->BindAction(TEXT("Camera_Rotate"), EInputEvent::IE_Released, this, &AMyCharacter::OnCameraRotateEnd);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &AMyCharacter::LookUp);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &AMyCharacter::Turn);
 	
@@ -194,22 +169,34 @@ void AMyCharacter::QuestClear(int questID)
 	_questInstance->ClearQuest(questID);
 }
 
+/// <summary>
+/// 캐릭터 앞뒤 이동
+/// </summary>
+/// <param name="NewAxisValue"></param>
 void AMyCharacter::UpDown(float NewAxisValue)
 {
-	//DirectionToMove.X = NewAxisValue;		//쿼터뷰 고정
 	AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X), NewAxisValue);
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
 }
 
+/// <summary>
+/// 캐릭터 좌우 이동
+/// </summary>
+/// <param name="NewAxisValue"></param>
 void AMyCharacter::LeftRight(float NewAxisValue)
 {
-	//DirectionToMove.Y = NewAxisValue;		//쿼터뷰 고정
 	AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::Y), NewAxisValue);
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
 }
 
+/// <summary>
+/// 카메라 위아래
+/// </summary>
+/// <param name="NewAxisValue"></param>
 void AMyCharacter::LookUp(float NewAxisValue)
 {
+	if (IsRotateState == false) return;
+
 	float value = -NewAxisValue * TurnSpeed;
 	if (AxisUpDownValue + value < MinAxisUpDown 
 		|| MaxAxisUpDown < AxisUpDownValue + value) return;		// 위아래 카메라 이동은 최소,최대 막아뒀음
@@ -217,8 +204,14 @@ void AMyCharacter::LookUp(float NewAxisValue)
 	AddControllerPitchInput(value);
 }
 
+/// <summary>
+/// 카메라 회전
+/// </summary>
+/// <param name="NewAxisValue"></param>
 void AMyCharacter::Turn(float NewAxisValue)
 {
+	if (IsRotateState == false) return;
+
 	AddControllerYawInput(NewAxisValue * TurnSpeed);
 }
 
@@ -229,6 +222,16 @@ void AMyCharacter::OnInteraction()
 	{
 		interactionObj->OnInteraction();
 	}
+}
+
+void AMyCharacter::OnCameraRotate()
+{
+	IsRotateState = true;
+}
+
+void AMyCharacter::OnCameraRotateEnd()
+{
+	IsRotateState = false;
 }
 
 void AMyCharacter::ToggleInventoryActivation()
