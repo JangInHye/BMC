@@ -175,6 +175,8 @@ void AMyCharacter::QuestClear(int questID)
 /// <param name="NewAxisValue"></param>
 void AMyCharacter::UpDown(float NewAxisValue)
 {
+	if (MyState != EStateType::E_Move) return;
+
 	AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X), NewAxisValue);
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
 }
@@ -185,6 +187,8 @@ void AMyCharacter::UpDown(float NewAxisValue)
 /// <param name="NewAxisValue"></param>
 void AMyCharacter::LeftRight(float NewAxisValue)
 {
+	if (MyState != EStateType::E_Move) return;
+
 	AddMovementInput(FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::Y), NewAxisValue);
 	//UE_LOG(LogTemp, Warning, TEXT("%f"), NewAxisValue);
 }
@@ -195,7 +199,7 @@ void AMyCharacter::LeftRight(float NewAxisValue)
 /// <param name="NewAxisValue"></param>
 void AMyCharacter::LookUp(float NewAxisValue)
 {
-	if (IsRotateState == false) return;
+	if (IsRotateState == false || MyState != EStateType::E_Move) return;
 
 	float value = -NewAxisValue * TurnSpeed;
 	if (AxisUpDownValue + value < MinAxisUpDown 
@@ -210,7 +214,7 @@ void AMyCharacter::LookUp(float NewAxisValue)
 /// <param name="NewAxisValue"></param>
 void AMyCharacter::Turn(float NewAxisValue)
 {
-	if (IsRotateState == false) return;
+	if (IsRotateState == false || MyState != EStateType::E_Move) return;
 
 	AddControllerYawInput(NewAxisValue * TurnSpeed);
 }
@@ -243,6 +247,8 @@ void AMyCharacter::ToggleInventoryActivation()
 		InventoryWidget->SetVisibility(true);
 		UE_LOG(LogTemp, Warning, TEXT("OpenInventory"));
 		isInventoryActive = true;
+
+		ChangeState(EStateType::E_Inventory);
 	}
 	else
 	{
@@ -250,6 +256,16 @@ void AMyCharacter::ToggleInventoryActivation()
 		InventoryWidget->SetVisibility(false);
 		UE_LOG(LogTemp, Warning, TEXT("CloseInventory"));
 		isInventoryActive = false;
+		ChangeState(EStateType::E_Move);
 	}
 	
+}
+
+/// <summary>
+/// 상태 변경
+/// </summary>
+/// <param name="curType"></param>
+void AMyCharacter::ChangeState(EStateType curType)
+{
+	MyState = curType;
 }

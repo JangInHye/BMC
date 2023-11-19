@@ -13,6 +13,15 @@
 #include "UI_Inveotory.h"
 #include "MyCharacter.generated.h"
 
+/// <summary>
+/// 조작 상태
+/// </summary>
+enum class EStateType : uint8
+{
+	E_Move UMETA(DisplayName = "StateType Ingame"),
+	E_Inventory UMETA(DisplayName = "StateType Inventory"),
+};
+
 UCLASS()
 class BMCGAME_API AMyCharacter : public ACharacter
 {
@@ -91,6 +100,8 @@ private:
 	float AxisUpDownValue = 0.0f;
 	bool IsRotateState = false;
 
+	EStateType MyState = EStateType::E_Move;
+
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);
 	void LookUp(float NewAxisValue);
@@ -99,4 +110,6 @@ private:
 	void OnCameraRotate();
 	void OnCameraRotateEnd();
 	void ToggleInventoryActivation();
+	
+	void ChangeState(EStateType curType);
 };
