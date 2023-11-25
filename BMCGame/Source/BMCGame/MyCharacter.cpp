@@ -118,8 +118,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::UpDown);
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::LeftRight);
 	// 마우스 회전
-	PlayerInputComponent->BindAction(TEXT("Camera_Rotate"), EInputEvent::IE_Pressed, this, &AMyCharacter::OnCameraRotate);
-	PlayerInputComponent->BindAction(TEXT("Camera_Rotate"), EInputEvent::IE_Released, this, &AMyCharacter::OnCameraRotateEnd);
+	PlayerInputComponent->BindAction(TEXT("Mouse_RightButton"), EInputEvent::IE_Pressed, this, &AMyCharacter::OnCameraRotate);
+	PlayerInputComponent->BindAction(TEXT("Mouse_RightButton"), EInputEvent::IE_Released, this, &AMyCharacter::OnCameraRotateEnd);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &AMyCharacter::LookUp);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &AMyCharacter::Turn);
 	

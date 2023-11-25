@@ -18,6 +18,7 @@ void AABPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FInputModeGameOnly InputMode;
-	SetInputMode(InputMode);
+	SetShowMouseCursor(true);
+	bEnableClickEvents = true;
+	bEnableMouseOverEvents = true;
 }
