@@ -28,9 +28,11 @@ void AInteractionTarget::OnEndCharacterOverlap(UPrimitiveComponent* OverlappedCo
 void AInteractionTarget::OnInteraction()
 {
 	if (_myChar == nullptr) return;
+	_myChar->InventoryWidget->SetVisibility(true);
+	_myChar->InteractionWidget->SetVisibility(false);
 
 	// 퀘스트 대상이 맞는지 체크
 
 	// 퀘스트 대상이라면 해당 퀘스트 처리
-	_myChar->QuestClear(_myID);
+	//_myChar->QuestClear(_myID);
 }
