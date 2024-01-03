@@ -91,6 +91,10 @@ void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (_levelData == nullptr)
+	{
+		_levelData = GetGameInstance()->GetSubsystem<ULevelDataInstanceSubsystem>();
+	}
 }
 
 // Called every frame
@@ -199,6 +203,8 @@ void AMyCharacter::LeftRight(float NewAxisValue)
 /// <param name="NewAxisValue"></param>
 void AMyCharacter::LookUp(float NewAxisValue)
 {
+	// 사무실일 경우 카메라 회전 X
+	if (_levelData->GetCurState() == ELevelType::E_Office) return;
 	if (IsRotateState == false || MyState != EStateType::E_Move) return;
 
 	float value = -NewAxisValue * TurnSpeed;
@@ -214,6 +220,8 @@ void AMyCharacter::LookUp(float NewAxisValue)
 /// <param name="NewAxisValue"></param>
 void AMyCharacter::Turn(float NewAxisValue)
 {
+	// 사무실일 경우 카메라 회전 X
+	if (_levelData->GetCurState() == ELevelType::E_Office) return;
 	if (IsRotateState == false || MyState != EStateType::E_Move) return;
 
 	AddControllerYawInput(NewAxisValue * TurnSpeed);

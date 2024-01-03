@@ -11,6 +11,7 @@
 #include "Components/WidgetComponent.h"
 #include "UI/UI_InteractionKey.h"
 #include "UI_Inveotory.h"
+#include "LevelDataInstanceSubsystem.h"
 #include "MyCharacter.generated.h"
 
 /// <summary>
@@ -98,9 +99,10 @@ private:
 	AABInteraction* interactionObj;		// 상호작용 오브젝트가 1개라는 전제
 	UQuestInstanceSubsystem* _questInstance;
 	float AxisUpDownValue = 0.0f;
-	bool IsRotateState = false;
+	bool IsRotateState = false;				// 마우스 우클릭 체크
 
 	EStateType MyState = EStateType::E_Move;
+	ULevelDataInstanceSubsystem* _levelData;	// 레벨 데이터
 
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);

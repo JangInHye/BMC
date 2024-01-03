@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "../LevelDataInstanceSubsystem.h"
 #include "../InteractionItem/ABInteraction.h"
 #include "InteractionDoor.generated.h"
 
@@ -28,6 +29,8 @@ public:
 
 		virtual void OnInteraction();
 private:
+	ULevelDataInstanceSubsystem* _levelData;	// 레벨 데이터
+
 	UPROPERTY(EditAnywhere, Category = Camera)
 		EMoveToLevel _moveToLevel = EMoveToLevel::E_Office;
 
